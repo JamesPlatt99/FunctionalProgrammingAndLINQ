@@ -8,19 +8,21 @@ namespace FunctionalProgrammingAndLINQ.Solutions
 {
     public class SecondMostFrequentColour
     {
+        public string Result { get { return _result; } }
+        private string _result;
         public SecondMostFrequentColour(IEnumerable<Apple> apples)
         {
-            Console.Write("Second most frequent colour: ");
-            GetSecondMostFrequentColour(apples);
+            _result = GetSecondMostFrequentColour(apples);
+            Console.WriteLine("Second most frequent colour: " + _result);
         }
 
-        private void GetSecondMostFrequentColour(IEnumerable<Apple> apples)
+        private String GetSecondMostFrequentColour(IEnumerable<Apple> apples)
         {
-            Console.WriteLine(apples.Where(n => n.Poisoned && n.Colour != "Red")
-                                    .GroupBy(n => n.Colour)
-                                    .OrderByDescending(n => n.Count())
-                                    .First()
-                                    .Key);
+            return apples.Where(n => n.Poisoned && n.Colour != "Red")
+                         .GroupBy(n => n.Colour)
+                         .OrderByDescending(n => n.Count())
+                         .First()
+                         .Key;
         }
     }
 }

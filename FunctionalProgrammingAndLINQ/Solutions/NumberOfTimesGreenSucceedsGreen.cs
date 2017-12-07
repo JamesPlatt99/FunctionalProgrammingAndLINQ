@@ -8,19 +8,48 @@ namespace FunctionalProgrammingAndLINQ.Solutions
 {
     public class NumberOfTimesGreenSucceedsGreen
     {
-        public NumberOfTimesGreenSucceedsGreen(IEnumerable<Apple> apples)
+        public int Result { get { return _result; } }
+        private int _result;
+
+        public NumberOfTimesGreenSucceedsGreen(IEnumerable<Apple> apples, Methods method)
         {
-            Console.Write("Number of times green succeeds green: ");
-            GetNumberOfTimesGreenSucceedsGreen(apples);
+            switch (method)
+            {
+                case Methods.ForEach:
+                    _result = GetNumberOfTimesGreenSucceedsGreenForEach(apples);
+                    break;
+                case Methods.LINQ:
+                    _result = GetNumberOfTimesGreenSucceedsGreenLinq(apples);
+                    break;
+            }
+            Console.WriteLine($"Number of times green succeeds green{method.ToString()}: {_result}");
         }
 
-        private void GetNumberOfTimesGreenSucceedsGreen(IEnumerable<Apple> apples)
+        public enum Methods
         {
-            Console.WriteLine(apples
-                                    .Take(apples.Count() - 1)
-                                    .Where((n, i) => n.Colour == apples
-                                                                       .ElementAt(i + 1).Colour)
-                                    .Count());
+            LINQ,
+            ForEach
+        }
+
+        private int GetNumberOfTimesGreenSucceedsGreenLinq(IEnumerable<Apple> apples)
+        {
+            return apples.Take(apples.Count() - 1)
+                         .Where((n, i) => (n.Colour == "Green") && (n.Colour == apples.ElementAt(i + 1).Colour))
+                         .Count();
+        }
+        private int GetNumberOfTimesGreenSucceedsGreenForEach(IEnumerable<Apple> apples)
+        {
+            int result = 0;
+            Apple prevApple = null;
+            foreach(Apple apple in apples)
+            {
+                if(prevApple?.Colour == "Green" && apple.Colour == "Green")
+                {
+                    result++;
+                }
+                prevApple = apple;
+            }
+            return result;
         }
     }
 }

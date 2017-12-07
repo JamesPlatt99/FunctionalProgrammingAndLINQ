@@ -8,15 +8,18 @@ namespace FunctionalProgrammingAndLINQ.Solutions
 {
     public class TotalPoisoned
     {
+        public int Result { get { return _result; } }
+        private int _result;
+
         public TotalPoisoned(IEnumerable<Apple> apples)
         {
-            Console.Write("Total Poisoned: ");
-            GetTotalPoisonedLinq(apples);
+            _result = GetTotalPoisonedLinq(apples);
+            Console.WriteLine("Total Poisoned: " + _result);
         }
 
-        private void GetTotalPoisonedLinq(IEnumerable<Apple> apples)
+        private int GetTotalPoisonedLinq(IEnumerable<Apple> apples)
         {
-            Console.WriteLine(apples.Count(n => n.Poisoned));
+            return apples.Count(n => n.Poisoned);
         }
     }
 }

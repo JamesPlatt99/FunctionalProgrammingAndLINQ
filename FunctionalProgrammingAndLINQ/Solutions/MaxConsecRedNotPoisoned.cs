@@ -8,21 +8,23 @@ namespace FunctionalProgrammingAndLINQ.Solutions
 {
     public class MaxConsecRedNotPoisoned
     {
+        public int Result { get { return _result;  } }
+        private int _result;
         public MaxConsecRedNotPoisoned(IEnumerable<Apple> apples, Methods method)
         {
-            Console.Write("Max consec red not poisoned: ");
             switch (method)
             {
                 case Methods.LINQ:
-                    LinqMethod(apples);
+                    _result = LinqMethod(apples);
                     break;
                 case Methods.LINQ2:
-                    LinqMethod2(apples);
+                    _result = LinqMethod2(apples);
                     break;
                 case Methods.ForEach:
-                    ForEachMethod(apples);
+                    _result = ForEachMethod(apples);
                     break;
             }
+            Console.WriteLine($"Max consec red not poisoned{method.ToString()}: {_result}" );
         }
 
         public enum Methods
@@ -32,30 +34,30 @@ namespace FunctionalProgrammingAndLINQ.Solutions
             ForEach
         }
 
-        public void LinqMethod(IEnumerable<Apple> apples)
+        public int LinqMethod(IEnumerable<Apple> apples)
         {
-            int answer =  apples.Select((n, i) => new { Apple = n, Index = i })
-                                .Where(n => n.Apple.Colour != "Red" || n.Apple.Poisoned)
-                                .Select((n, i) => new { oldIndex = n.Index, newIndex = i }).ToList()
-                                .Skip(1)
-                                .Max(n =>
-                                        n.oldIndex - apples.Select((b, i) => new { Apple = b, Index = i })
-                                        .Where(b => b.Apple.Colour != "Red" || b.Apple.Poisoned)
-                                        .Select((b, i) => new { oldIndex = b.Index, newIndex = i }).ToList().ElementAt(n.newIndex - 1).oldIndex
-                                ) - 1;
-            Console.WriteLine(answer);
+            return apples.Select((n, i) => new { Apple = n, Index = i })
+                         .Where(n => n.Apple.Colour != "Red" || n.Apple.Poisoned)
+                         .Select((n, i) => new { oldIndex = n.Index, newIndex = i }).ToList()
+                         .Skip(1)
+                         .Max(n =>
+                                 n.oldIndex - apples.Select((b, i) => new { Apple = b, Index = i })
+                                 .Where(b => b.Apple.Colour != "Red" || b.Apple.Poisoned)
+                                 .Select((b, i) => new { oldIndex = b.Index, newIndex = i }).ToList().ElementAt(n.newIndex - 1).oldIndex
+                         ) - 1;
         }
 
-        public void LinqMethod2(IEnumerable<Apple> apples)
+        public int LinqMethod2(IEnumerable<Apple> apples)
         {
             int maxConsec = 0;
             int curConsec = 0;
-            apples.ToList().ForEach(n=> maxConsec = Math.Max((curConsec = (curConsec + Convert.ToInt32(!n.Poisoned && n.Colour == "Red") ) * Convert.ToInt32((!n.Poisoned && n.Colour == "Red"))), maxConsec));
+            short isValid = 0;
+            apples.ToList().ForEach(n=> maxConsec = Math.Max((curConsec = (curConsec + (isValid = Convert.ToInt16(!n.Poisoned && n.Colour == "Red")) ) * isValid), maxConsec));
 
-            Console.WriteLine(maxConsec);
+            return maxConsec;
         }
 
-        public void ForEachMethod(IEnumerable<Apple> apples)
+        public int ForEachMethod(IEnumerable<Apple> apples)
         {
             ApplePicker applePicker = new ApplePicker();
             int curConsec = 0;
@@ -71,7 +73,7 @@ namespace FunctionalProgrammingAndLINQ.Solutions
                 }
                 curConsec = 0;
             }
-            Console.WriteLine(maxConsec);
+            return maxConsec;
         }
     }
 }
