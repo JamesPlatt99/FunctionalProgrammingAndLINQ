@@ -44,8 +44,12 @@
   <ItemGroup>
     <Compile Include="Apple.cs" />
     <Compile Include="ApplePicker.cs" />
+    <Compile Include="Solutions\MaxConsecRedNotPoisoned.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solutions\NumberOfTimesGreenSucceedsGreen.cs" />
+    <Compile Include="Solutions\SecondMostPopularColour.cs" />
+    <Compile Include="Solutions\TotalPoisoned.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

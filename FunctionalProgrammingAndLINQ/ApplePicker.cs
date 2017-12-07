@@ -8,7 +8,23 @@ namespace FunctionalProgrammingAndLINQ
 {
     public class ApplePicker
     {
+        public ApplePicker(Boolean random = false)
+        {
+            _random = random;
+        }
+
+        private Boolean _random;
+
         public IEnumerable<Apple> PickApples()
+        {
+            if (_random)
+            {
+                return PickApplesRand();
+            }
+            return PickApplesDefault();
+        }
+
+        private IEnumerable<Apple> PickApplesDefault()
         {
             int colourIndex = 1;
             int poisonIndex = 7;
@@ -23,6 +39,32 @@ namespace FunctionalProgrammingAndLINQ
 
                 colourIndex += 5;
                 poisonIndex += 37;
+            }
+        }
+        private IEnumerable<Apple> PickApplesRand()
+        {
+            while (true)
+            {
+                yield return new Apple
+                {
+                    Colour = GetRandColour(),
+                    Poisoned = (new Random().Next(0, 100) % 4 == 0)
+                };
+                
+            }
+        }
+
+        private string GetRandColour()
+        {
+            int rand = new Random().Next(1, 4);
+            switch (rand)
+            {
+                case 1:
+                    return "Yellow";
+                case 2:
+                    return "Green";
+                default:
+                    return "Red";
             }
         }
 
