@@ -26,6 +26,7 @@ namespace FunctionalProgrammingAndLINQ
 
             var maxConsecRedNotPoisonedForEach = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.ForEach);
             var maxConsecRedNotPoisonedLinq = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.LINQ);
+            var maxConsecRedNotPoisonedLinq2 = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.LINQ2);
             var totalPoisoned = new TotalPoisoned(apples);
             var secondMostPopularColour = new SecondMostFrequentColour(apples);
             var numberOfTimesGreenSucceedsGreen = new NumberOfTimesGreenSucceedsGreen(apples);

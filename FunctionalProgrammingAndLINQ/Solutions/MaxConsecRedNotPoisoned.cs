@@ -16,6 +16,9 @@ namespace FunctionalProgrammingAndLINQ.Solutions
                 case Methods.LINQ:
                     LinqMethod(apples);
                     break;
+                case Methods.LINQ2:
+                    LinqMethod2(apples);
+                    break;
                 case Methods.ForEach:
                     ForEachMethod(apples);
                     break;
@@ -25,6 +28,7 @@ namespace FunctionalProgrammingAndLINQ.Solutions
         public enum Methods
         {
             LINQ,
+            LINQ2,
             ForEach
         }
 
@@ -40,6 +44,15 @@ namespace FunctionalProgrammingAndLINQ.Solutions
                                         .Select((b, i) => new { oldIndex = b.Index, newIndex = i }).ToList().ElementAt(n.newIndex - 1).oldIndex
                                 ) - 1;
             Console.WriteLine(answer);
+        }
+
+        public void LinqMethod2(IEnumerable<Apple> apples)
+        {
+            int maxConsec = 0;
+            int curConsec = 0;
+            apples.ToList().ForEach(n=> maxConsec = Math.Max((curConsec = (curConsec + Convert.ToInt32(!n.Poisoned && n.Colour == "Red") ) * Convert.ToInt32((!n.Poisoned && n.Colour == "Red"))), maxConsec));
+
+            Console.WriteLine(maxConsec);
         }
 
         public void ForEachMethod(IEnumerable<Apple> apples)
