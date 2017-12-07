@@ -21,11 +21,11 @@ namespace FunctionalProgrammingAndLINQ
 
         static void Run()
         {
-            var applePicker = new ApplePicker();
-            List<Apple> apples = applePicker.PickApples().Take(5000).ToList();
+            var applePicker = new ApplePicker(true);
+            List<Apple> apples = applePicker.PickApples().Take(10000).ToList();
 
             var maxConsecRedNotPoisonedForEach = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.ForEach);
-            var maxConsecRedNotPoisonedLinq = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.ForEach);
+            var maxConsecRedNotPoisonedLinq = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.LINQ);
             var totalPoisoned = new TotalPoisoned(apples);
             var secondMostPopularColour = new SecondMostFrequentColour(apples);
             var numberOfTimesGreenSucceedsGreen = new NumberOfTimesGreenSucceedsGreen(apples);
