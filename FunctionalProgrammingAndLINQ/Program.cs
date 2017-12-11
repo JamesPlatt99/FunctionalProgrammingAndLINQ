@@ -12,11 +12,11 @@ namespace FunctionalProgrammingAndLINQ
         static void Main(string[] args)
         {
             Run();
-            //for(int i = 0; i < 4; i++)
-            //{
-            //    Run(true);
-            //    Console.WriteLine();
-            //}
+            for (int i = 0; i < 4; i++)
+            {
+                Run(true);
+                Console.WriteLine();
+            }
             Console.ReadLine();
         }
 

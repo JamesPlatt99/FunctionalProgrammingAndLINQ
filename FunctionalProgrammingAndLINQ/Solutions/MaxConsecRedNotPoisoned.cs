@@ -36,6 +36,10 @@ namespace FunctionalProgrammingAndLINQ.Solutions
 
         public int LinqMethod(IEnumerable<Apple> apples)
         {
+            //Stores the initial indexes of the apples.
+            //Filters out all of the apples that are red and not poisoned.
+            //Finds the max difference between the original indexes.
+            //Subtracts one to get the number of apples between the two.
             return apples.Select((n, i) => new { Apple = n, Index = i })
                          .Where(n => n.Apple.Colour != "Red" || n.Apple.Poisoned)
                          .Select((n, i) => new { oldIndex = n.Index, newIndex = i }).ToList()
