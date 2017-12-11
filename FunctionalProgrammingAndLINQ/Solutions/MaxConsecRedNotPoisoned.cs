@@ -24,7 +24,7 @@ namespace FunctionalProgrammingAndLINQ.Solutions
                     _result = ForEachMethod(apples);
                     break;
             }
-            Console.WriteLine($"Max consec red not poisoned{method.ToString()}: {_result}" );
+            Console.WriteLine($"Max consec red not poisoned ({method.ToString()}): {_result}" );
         }
 
         public enum Methods
@@ -51,8 +51,8 @@ namespace FunctionalProgrammingAndLINQ.Solutions
         {
             int maxConsec = 0;
             int curConsec = 0;
-            short isValid = 0;
-            apples.ToList().ForEach(n=> maxConsec = Math.Max((curConsec = (curConsec + (isValid = Convert.ToInt16(!n.Poisoned && n.Colour == "Red")) ) * isValid), maxConsec));
+            Byte isValid = 0;
+            apples.ToList().ForEach(n=> maxConsec = Math.Max((curConsec = (curConsec + (isValid = Convert.ToByte(!n.Poisoned && n.Colour == "Red")) ) * isValid), maxConsec));
 
             return maxConsec;
         }

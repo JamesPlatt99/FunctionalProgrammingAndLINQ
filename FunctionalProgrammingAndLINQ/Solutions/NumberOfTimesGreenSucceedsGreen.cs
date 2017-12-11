@@ -22,7 +22,7 @@ namespace FunctionalProgrammingAndLINQ.Solutions
                     _result = GetNumberOfTimesGreenSucceedsGreenLinq(apples);
                     break;
             }
-            Console.WriteLine($"Number of times green succeeds green{method.ToString()}: {_result}");
+            Console.WriteLine($"Number of times green succeeds green ({method.ToString()}): {_result}");
         }
 
         public enum Methods
