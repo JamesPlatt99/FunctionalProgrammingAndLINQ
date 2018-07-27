@@ -16,6 +16,8 @@ namespace FunctionalProgrammingAndLINQ
             {
                 Run(true);
                 Console.WriteLine();
+                Console.WriteLine("-------------------------");
+                Console.WriteLine();
             }
             Console.ReadLine();
         }
@@ -28,6 +30,7 @@ namespace FunctionalProgrammingAndLINQ
             var maxConsecRedNotPoisonedForEach = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.ForEach);
             var maxConsecRedNotPoisonedLinq = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.LINQ);
             var maxConsecRedNotPoisonedLinq2 = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.LINQ2);
+            var maxConsecRedNotPoisonedLinq3 = new MaxConsecRedNotPoisoned(apples, MaxConsecRedNotPoisoned.Methods.LINQ3);
             var totalPoisoned = new TotalPoisoned(apples);
             var secondMostPopularColour = new SecondMostFrequentColour(apples);
             var numberOfTimesGreenSucceedsGreenForEach = new NumberOfTimesGreenSucceedsGreen(apples, NumberOfTimesGreenSucceedsGreen.Methods.ForEach);

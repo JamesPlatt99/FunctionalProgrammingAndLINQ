@@ -20,6 +20,9 @@ namespace FunctionalProgrammingAndLINQ.Solutions
                 case Methods.LINQ2:
                     _result = LinqMethod2(apples);
                     break;
+                case Methods.LINQ3:
+                    _result = LinqMethod3(apples);
+                    break;
                 case Methods.ForEach:
                     _result = ForEachMethod(apples);
                     break;
@@ -31,6 +34,7 @@ namespace FunctionalProgrammingAndLINQ.Solutions
         {
             LINQ,
             LINQ2,
+            LINQ3,
             ForEach
         }
 
@@ -61,9 +65,15 @@ namespace FunctionalProgrammingAndLINQ.Solutions
             return maxConsec;
         }
 
+        public int LinqMethod3(IEnumerable<Apple> apples)
+        {
+            var result = apples.Aggregate(new { cur = 0, max = 0 },(acc, n) => new { cur = (acc.cur + 1) * Convert.ToByte(n.Colour == "Red" && !n.Poisoned),
+                                                                                     max = Math.Max(acc.max, (acc.cur + 1) * Convert.ToByte(n.Colour == "Red" && !n.Poisoned)) });
+            return result.max;
+        }
+
         public int ForEachMethod(IEnumerable<Apple> apples)
         {
-            ApplePicker applePicker = new ApplePicker();
             int curConsec = 0;
             int maxConsec = 0;
 
